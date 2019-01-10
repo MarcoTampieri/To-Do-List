@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Kalam');
+
 body {
     background-image: url("list.jpg");
     background-color: #1f1e1e;
@@ -12,11 +14,19 @@ main {
     margin: auto
 }
 
+h2 {
+    font-family: 'Kalam';
+    background-color: #000000a8;
+    display: inline-block;
+}
+/* \\\\\\\\\\\\\\\\\\////////////////// */
+/* Container for the to-do-list template */
+/* //////////////////\\\\\\\\\\\\\\\\\\ */
 .grid-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    grid-template-areas: "toDoElements onIt stuck postponed notes priority options"". . . . . . .";
+    grid-template-rows: 1fr;
+    grid-template-areas: "toDoElements onIt stuck postponed notes priority options";
     background-color: black
 }
 
@@ -54,3 +64,41 @@ main {
     grid-area: options;
     text-align: center
 }
+
+
+/* \\\\\\\\\\\\\\\\\\////////////////// */
+/* Container for the to-do-list elements */
+/* //////////////////\\\\\\\\\\\\\\\\\\ */
+
+.contenitore-griglia {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "fare inCorso bloccato rimandato note priorita opzioni";
+  }
+  
+  .fare { grid-area: fare; }
+  
+  .inCorso { grid-area: inCorso; }
+  
+  .bloccato { grid-area: bloccato; }
+  
+  .rimandato { grid-area: rimandato; }
+  
+  .note { grid-area: note; }
+  
+  .priorita { grid-area: priorita; }
+  
+  .opzioni {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas: "modifica" "elimina" "archivia";
+    grid-area: opzioni;
+  }
+  
+  .modifica {grid-area: modifica;}
+  
+  .elimina { grid-area: elimina; }
+  
+  .archivia { grid-area: archivia; }

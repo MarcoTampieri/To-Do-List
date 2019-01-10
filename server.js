@@ -10,8 +10,8 @@ const getAll = require('./routes/getAll');
 const signUp = require('./routes/signUp');
 const signIn = require('./routes/signIn');
 const remove = require('./routes/remove');
-//process.env.PORT || per il basso
- 
+
+//process.env.PORT || per il basso 
 let port = 5000;
 
 mongoose.connect(config.database, {useNewUrlParser: true}, (err) => {
