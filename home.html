@@ -29,16 +29,26 @@
         </div>
 
         <div class="contenitore-griglia">
-            <div class="fare"></div>
-            <div class="lavoro"></div>
-            <div class="bloccato"></div>
-            <div class="rimandato"></div>
+            <div class="fare"> element to do</div>
+            <div class="inCorso">
+                <input type="radio" name="elementStatus" value="on-it">
+            </div>
+            <div class="bloccato">
+                <input type="radio" name="elementStatus" value="stuck">
+            </div>
+            <div class="rimandato">
+                <input type="radio" name="elementStatus" value="ostponed">
+            </div>
             <div class="note"></div>
             <div class="priorita"></div>
             <div class="a">
-                <div class="modifica"></div>
-                <div class="elimina"></div>
-                <div class="archivia"></div>
+                <div class="modifica">
+                    <ion-icon name="hammer"></ion-icon>
+                </div>
+                <div class="elimina">&#10006;</div>
+                <div class="archivia">
+                    <ion-icon name="folder-open"></ion-icon>
+                </div>
             </div>
         </div>
 
