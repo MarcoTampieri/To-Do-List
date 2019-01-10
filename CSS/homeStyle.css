@@ -1,0 +1,56 @@
+body {
+    background-image: url("list.jpg");
+    background-color: #1f1e1e;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #d6ccb1;
+}
+
+main {
+    width: 70%;
+    margin: auto
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: "toDoElements onIt stuck postponed notes priority options"". . . . . . .";
+    background-color: black
+}
+
+.toDoElements {
+    grid-area: toDoElements;
+    text-align: center
+}
+
+.onIt {
+    grid-area: onIt;
+    text-align: center
+}
+
+.stuck {
+    grid-area: stuck;
+    text-align: center
+}
+
+.postponed {
+    grid-area: postponed;
+    text-align: center
+}
+
+.notes {
+    grid-area: notes;
+    text-align: center
+}
+
+.priority {
+    grid-area: priority;
+    text-align: center
+}
+
+.options {
+    grid-area: options;
+    text-align: center
+}

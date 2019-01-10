@@ -1,4 +1,4 @@
 module.exports = {
     'secret': 'thisisnotthesecretyouarelookingfor',
-    'database': 'mongodb://io:Lapapera1@ds125422.mlab.com:25422/mcgt1',
+    'database': 'mongodb://MCGT:Lapapera1@ds253104.mlab.com:53104/mcgt2'
 }
