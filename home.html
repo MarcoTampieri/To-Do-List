@@ -10,52 +10,174 @@
 
 <body>
 
+    <!-- Modal Creator -->
+
+    <div class="modal">
+
+        <!-- Modal content -->
+
+        <div class="modalContent">
+
+            <h2>New Task</h2>
+
+            <button class="closeButton">
+                <ion-icon name="close-circle"></ion-icon>
+            </button>
+
+            <div class="creatorGrid">
+
+                <div class="createE">
+                    <textarea name="" class="writeName" cols="15" rows="5" placeholder="Task name"></textarea>
+                </div>
+
+                <div class="statusO">
+                    <p class="radioButton">
+                        On it<br>
+                        <input type="radio" name="elementStatus" value="on-it">
+                    </p>
+
+                </div>
+
+                <div class="statusS">
+                    <p class="radioButton">
+                        Stuck<br>
+                        <input type="radio" name="elementStatus" value="stuck">
+                    </p>
+                </div>
+
+                <div class="statusP">
+                    <p class="radioButton">
+                        Postponed<br>
+                        <input type="radio" name="elementStatus" value="postponed">
+                    </p>
+                </div>
+
+                <div class="createN">
+                    <textarea name="" class="writeNote" cols="15" rows="5" placeholder="Notes"></textarea>
+                </div>
+
+                <div class="createP">
+                    <p>
+                        <select name="Priority Selector" id="prioritySelector" class="prioritySelector">
+                            <option value="-">-</option>
+                            <option value="top">Top</option>
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                            <option value="bottom">Bottom</option>
+                        </select>
+                    </p>
+
+                </div>
+
+                <div class="noOpt">
+                    <p>
+                        <button class="opzioniBottone">
+                            <ion-icon name="hammer"></ion-icon>
+                        </button>
+                        <button class="opzioniBottone">
+                            <ion-icon name="remove-circle"></ion-icon>
+                        </button>
+                        <button class="opzioniBottone">
+                            <ion-icon name="folder-open"></ion-icon>
+                        </button>
+                    </p>
+                </div>
+            </div>
+
+            <button class="confirmButton">
+                Add Task
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- Main Section -->
     <main>
         <h2>My To Do.</h2>
-
+        <!-- Template container -->
         <div class="grid-container">
-            <div class="toDoElements">thing to do</div>
-            <div class="onIt"> on it radio1</div>
-            <div class="stuck">stuck radio2</div>
-            <div class="postponed"> postponed radio3</div>
-            <div class="notes">notes</div>
-            <div class="priority">priority list 1 to 5</div>
+            <div class="toDoElements">
+                <p>Tasks</p>
+            </div>
+            <div class="onIt">
+                <p>On it</p>
+            </div>
+            <div class="stuck">
+                <p>Stuck</p>
+            </div>
+            <div class="postponed">
+                <p>Postponed</p>
+            </div>
+            <div class="notes">
+                <p>Notes</p>
+            </div>
+            <div class="priority">
+                <p>Priority</p>
+            </div>
             <div class="options">
-                &#10010;/
-                <ion-icon name="hammer"></ion-icon>/
-                &#10006;/
-                <ion-icon name="folder-open"></ion-icon>
+                <button class="addButton">Add New</button>
             </div>
         </div>
 
+        <!-- Elements container -->
         <div class="contenitore-griglia">
-            <div class="fare"> element to do</div>
+
+            <div class="fare">
+                <p class="doTitle">Thing to do</p>
+            </div>
+
             <div class="inCorso">
-                <input type="radio" name="elementStatus" value="on-it">
+                <p class="radioButton">
+                    <input type="radio" name="elementStatus" value="on-it">
+                </p>
+
             </div>
+
             <div class="bloccato">
-                <input type="radio" name="elementStatus" value="stuck">
+                <p class="radioButton">
+                    <input type="radio" name="elementStatus" value="stuck">
+                </p>
             </div>
+
             <div class="rimandato">
-                <input type="radio" name="elementStatus" value="ostponed">
+                <p class="radioButton">
+                    <input type="radio" name="elementStatus" value="ostponed">
+                </p>
             </div>
-            <div class="note"></div>
-            <div class="priorita"></div>
-            <div class="a">
-                <div class="modifica">
-                    <ion-icon name="hammer"></ion-icon>
-                </div>
-                <div class="elimina">&#10006;</div>
-                <div class="archivia">
-                    <ion-icon name="folder-open"></ion-icon>
-                </div>
+
+            <div class="note">
+                <p class="doNotes">Here will be notes</p>
+            </div>
+
+            <div class="priorita">
+                <p>
+                    Here will be priority
+                </p>
+
+            </div>
+
+            <div class="opzioni">
+                <p>
+                    <button class="opzioniBottone" id="modifyButton">
+                        <ion-icon name="hammer"></ion-icon>
+                    </button>
+                    <button class="opzioniBottone" id="removeButton">
+                        <ion-icon name="remove-circle"></ion-icon>
+                    </button>
+                    <button class="opzioniBottone" id="archiveButton">
+                        <ion-icon name="folder-open"></ion-icon>
+                    </button>
+                </p>
             </div>
         </div>
-
-
+        <br><br>
     </main>
 
 
+
+    <script src="./scripts/homeScript.js"></script>
     <script src="https://unpkg.com/ionicons@4.5.0/dist/ionicons.js"></script>
 </body>
 
