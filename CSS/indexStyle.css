@@ -20,10 +20,19 @@ h2 {
     background-color: #00000059;
 }
 
+.options {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+.signUp, .signIn {
+    display: none;
+}
+
 div {
     background-color: #00000059;
     padding-top: 2px;
-
 }
 
 fieldset {

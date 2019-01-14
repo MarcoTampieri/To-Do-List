@@ -14,6 +14,7 @@ module.exports = (router) => {
                     succes: false,
                     message: `An other user has already signed up with this e-mail adress, try an other.`
                 });
+                console.log(`An other user has already signed up with this e-mail adress, try an other.`)
             } else {
                 const newDoer = new Doer({
                     name: req.body.name,

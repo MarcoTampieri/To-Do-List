@@ -84,6 +84,8 @@ button {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr;
     grid-template-areas: "fare inCorso bloccato rimandato note priorita opzioni";
+    border: 1px solid silver;
+    border-radius: 5px;
 }
 
 .fare {

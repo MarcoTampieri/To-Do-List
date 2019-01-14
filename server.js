@@ -3,6 +3,7 @@ const app = express();
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require("cors");
 
 const config = require('./config');
 const test = require('./routes/test');
@@ -19,10 +20,16 @@ mongoose.connect(config.database, {useNewUrlParser: true}, (err) => {
     console.log("I'm here.")
 }); 
 
+app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
-
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+    next();
+    });
 //*************
 //ROUTES
 //*************

@@ -15,15 +15,15 @@ module.exports = (router) => {
     
             if (err) throw err;
     
-            if (doer.name != req.body.name || doer.email != req.body.email) {
-                res.json({succes: false, message: `No user found matching entered parameters`});
+            if (!doer) {
+                res.send({succes: false, message: `No user found matching entered parameters`});
             } else if (doer) {
                 if (doer.password != req.body.password) {
-                    res.json({succes: false, message: `Incorrect password`})
+                    res.send({succes: false, message: `Incorrect password`})
                 } else {
                     let token = jwt.sign({doer: doer}, app.get('secret'), {expiresIn: '1h'});
     
-                    res.json({
+                    res.send({
                         succes: true,
                         message: `Succesfully created a token`,
                         token: token
@@ -32,4 +32,4 @@ module.exports = (router) => {
             }
         })
     })
-}
+} 
