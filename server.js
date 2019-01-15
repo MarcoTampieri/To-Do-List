@@ -11,6 +11,7 @@ const getAll = require('./routes/getAll');
 const signUp = require('./routes/signUp');
 const signIn = require('./routes/signIn');
 const remove = require('./routes/remove');
+// const buffer = require('./routes/buffer');
 
 //process.env.PORT || per il basso 
 let port = 5000;
@@ -20,6 +21,9 @@ mongoose.connect(config.database, {useNewUrlParser: true}, (err) => {
     console.log("I'm here.")
 }); 
 
+
+app.use(express.static('public'));
+app.use('/', express.static(__dirname + '/public'));
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -39,6 +43,7 @@ let router = express.Router();
 test(app);
 getAll(router);
 signUp(router);
+// buffer(router);
 signIn(router);
 remove(router);
 

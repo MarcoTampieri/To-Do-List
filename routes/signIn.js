@@ -26,7 +26,8 @@ module.exports = (router) => {
                     res.send({
                         succes: true,
                         message: `Succesfully created a token`,
-                        token: token
+                        token: token,
+                        id: doer.id 
                     })
                 }
             }
