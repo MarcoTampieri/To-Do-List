@@ -11,7 +11,7 @@ const getAll = require('./routes/getAll');
 const signUp = require('./routes/signUp');
 const signIn = require('./routes/signIn');
 const remove = require('./routes/remove');
-// const buffer = require('./routes/buffer');
+const home = require('./routes/home');
 
 //process.env.PORT || per il basso 
 let port = 5000;
@@ -43,7 +43,7 @@ let router = express.Router();
 test(app);
 getAll(router);
 signUp(router);
-// buffer(router);
+home(router);
 signIn(router);
 remove(router);
 
