@@ -38,6 +38,15 @@ closeButton.addEventListener("click", closeCreator);
 
 let url = "http://localhost:5000/api/home/bob";
 
+//XXXXXXXXXXXXXXXXXXXXX
+// CRUD SECTION
+//XXXXXXXXXXXXXXXXXXXXX
+
+let writeName = document.querySelector('.writeName').value;
+let radioButton = Attr.name('elementStatus').value;
+let writeNote = document.querySelector('.writeNote').value;
+let prioritySelector = document.querySelector('.prioritySelactor');
+
 let outPut = ""
 fetch(url, {
         method: 'GET',
@@ -63,5 +72,18 @@ fetch(url, {
             console.log("test3");
             console.log(item)
         })
+    });
 
-    })
+fetch(url, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: {
+        "userId": userId,
+        "argument": writeName,
+        "status": radioButton,
+        "notes": writeNote,
+        "priority": prioritySelector
+    }
+})

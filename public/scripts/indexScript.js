@@ -91,7 +91,7 @@ let postSignIn = async () => {
                     console.log(data)
                     if (sessionStorage.getItem("token")) {
                         alert('moving on');
-                        window.location = "/home.html";
+                        window.location = "/public/home.html";
                     } else {
                         alert("Wrong parameters");
                     }

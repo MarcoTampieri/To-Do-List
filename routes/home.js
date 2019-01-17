@@ -16,18 +16,6 @@ module.exports = (router) => {
         })
     })
 
-    // router.get('/home', function(req, res) {
-    //     ToDoElement.find({}, function(error, io) {
-    //     res.json(io);
-    //     console.log(io[0])
-    //     for(let i = 0; i < io.length; i++){
-    //    console.log(io[i])
-    //     }
-        
-    //     });
-    //     });
-
-
     router.post("/home", (req, res) => {
 
         const newToDoElement = new ToDoElement({
@@ -42,11 +30,11 @@ module.exports = (router) => {
                         res.send({
                             message: `Task ${newToDoElement.argument} has been saved.`
                         });
-                        console.log(`POST succesful, added ${newToDoElement.name} to users.`)
+                        console.log(`POST succesful, added ${newToDoElement.argument} to list.`)
                     })
                     .catch(err => {
                         res.send(err);
-                        console.log(`Task ${newToDoElement.argument} has not  saved.`)
+                        console.log(`Task ${newToDoElement.argument} has not been saved.`)
                     })
     });
 
