@@ -4,7 +4,7 @@ let Schema = mongoose.Schema;
 module.exports = mongoose.model('ToDoElement', new Schema ({
     userId: String,
     argument: String,
-    status: Boolean,
+    status: String,
     notes: String,
     priority: String
 }))

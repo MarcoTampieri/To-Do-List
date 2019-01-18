@@ -144,7 +144,7 @@ button {
 /*  Here's Buttons */
 /* ////////\\\\\\\ */
 
-.addButton {
+.openButton {
     margin-top: 11px;
 }
 
@@ -193,7 +193,7 @@ button {
     margin-right: auto;
     border: 2px solid #a5a5a5;
     border-radius: 6px;
-    background-color: #e6e6e6e8;
+    background-color: #ffffffb6;
 }
 
 .modalContent h2 {
@@ -224,7 +224,7 @@ button {
     color: #1f1e1e;
 }
 
-.confirmButton {
+.addButton {
     position: relative;
     display: inline-block;
     left: 87.5%;
@@ -238,7 +238,7 @@ button {
     transition-duration: 0.4s;
 }
 
-.confirmButton:hover {
+.addButton:hover {
     background-color: #FF7C00;
     color: #1f1e1e;
 }

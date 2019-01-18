@@ -1,22 +1,56 @@
 const ToDoElement = require('../app/models/list');
 
 module.exports = (router) => {
+    router.use((req, res, next) => {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+        next();
+    });
 
-    router.get('/home/:userId?', (req, res) => {
+    //*****GET*****
+    router.get('/home/:userId', (req, res) => {
         ToDoElement.find({
             userId: req.params.userId,
         }, (err, ToDoElement) => {
             if (err) throw err;
-            
+
             res.send(ToDoElement)
-            for(i = 0; i < ToDoElement.length; i++) {
+            console.log(ToDoElement)
+            for (i = 0; i < ToDoElement.length; i++) {
                 console.log(ToDoElement[i].notes)
             }
-            
+
         })
     })
 
-    router.post("/home", (req, res) => {
+    router.delete('/home/:userId', (req, res) => {
+        ToDoElement.findById(req.params.elementId)
+        .then(response => {
+            console.log(response)
+        })
+
+
+        // console.log(email);
+        // jsonfile.readFile(file_path, function (err, content) {
+
+        //     for (var i = content.length - 1; i >= 0; i--) {
+        //         if (content[i].email === email) {
+        //             console.log("removing " + content[i].email + "from DB");
+        //             content.splice(i, 1);
+        //         }
+        //     }
+
+        //     jsonfile.writeFile(file_path, content, function (err) {
+        //         console.log(err);
+        //     });
+        //     res.sendStatus(200);
+        // });
+    });
+
+    //*****POST*****
+
+    router.post("/home/:userId", (req, res) => {
 
         const newToDoElement = new ToDoElement({
             userId: req.body.userId,
@@ -26,38 +60,19 @@ module.exports = (router) => {
             priority: req.body.priority
         })
         newToDoElement.save()
-                    .then(output => {
-                        res.send({
-                            message: `Task ${newToDoElement.argument} has been saved.`
-                        });
-                        console.log(`POST succesful, added ${newToDoElement.argument} to list.`)
-                    })
-                    .catch(err => {
-                        res.send(err);
-                        console.log(`Task ${newToDoElement.argument} has not been saved.`)
-                    })
+            .then(output => {
+                res.send({
+                    message: `Task ${newToDoElement.argument} has been saved.`
+                });
+                console.log(`POST succesful, added ${newToDoElement.argument} to list.`)
+            })
+            .catch(err => {
+                res.send(err);
+                console.log(`Task ${newToDoElement.argument} has not been saved.`)
+            })
     });
 
-
-    // router.delete("/users", (req, res) => {
-    //     let email = req.body.email;
-    //     console.log(email);
-    //     jsonfile.readFile(file_path, function (err, content) {
-
-    //         for (var i = content.length - 1; i >= 0; i--) {
-    //             if (content[i].email === email) {
-    //                 console.log("removing " + content[i].email + "from DB");
-    //                 content.splice(i, 1);
-    //             }
-    //         }
-
-    //         jsonfile.writeFile(file_path, content, function (err) {
-    //             console.log(err);
-    //         });
-    //         res.sendStatus(200);
-    //     });
-    // });
-
+    
 
     // router.put("/user", (req, res) => {
     //     let user;
@@ -82,6 +97,11 @@ module.exports = (router) => {
     //     });
     //     res.send(200);
     // });
+
+    
+
+
+
 
 
 }

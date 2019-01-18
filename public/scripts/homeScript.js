@@ -1,6 +1,8 @@
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+// SET UP
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 let token = sessionStorage.getItem("token");
 let userId = sessionStorage.getItem("userId");
-
 
 if (!token) {
     alert('You do not have acces to this page.');
@@ -11,16 +13,17 @@ const body = document.querySelector("body");
 body.style.display = "initial";
 
 
-const addButton = document.querySelector(".addButton");
+const openButton = document.querySelector(".openButton");
 const closeButton = document.querySelector(".closeButton");
-const confirmButton = document.querySelector(".confirmButton");
+const addButton = document.querySelector(".addButton");
 const modifyButton = document.querySelector("#modifyButton");
-const removeButton = document.querySelector("#removeButton");
+const removeButton = document.querySelector(".removeButton");
 const archiveButton = document.querySelector("#archiveButton");
-
-
 const modal = document.querySelector(".modal");
 
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+// FUNCTIONS
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 const openCreator = () => {
     modal.style.display = "initial";
@@ -33,57 +36,133 @@ const closeCreator = () => {
     modal.style.display = "none";
 }
 
-addButton.addEventListener("click", openCreator);
-closeButton.addEventListener("click", closeCreator);
 
-let url = "http://localhost:5000/api/home/bob";
+// *****CRUD SECTION*****
 
-//XXXXXXXXXXXXXXXXXXXXX
-// CRUD SECTION
-//XXXXXXXXXXXXXXXXXXXXX
+let url = `http://localhost:5000/api/home/${userId}`;
 
-let writeName = document.querySelector('.writeName').value;
-let radioButton = Attr.name('elementStatus').value;
-let writeNote = document.querySelector('.writeNote').value;
-let prioritySelector = document.querySelector('.prioritySelactor');
+//*****GET*****
+const generateList = () => {
+    let outPut = ""
+    fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(result => result.json())
+        .then(response => {
+            response.map((item, index) => {
+                outPut += /*html*/ `
+            <div class="contenitore-griglia" >
 
-let outPut = ""
-fetch(url, {
-        method: 'GET',
+                <div class="fare">
+                    <p class="doTitle">${item.argument}</p>
+                </div>
+
+                <div class="inCorso">
+                    <p class="radioButton">
+                        <input type="radio" name="elementStatus${item._id}" value="on-it">
+                    </p>
+
+                </div>
+
+                <div class="bloccato">
+                    <p class="radioButton">
+                        <input type="radio" name="elementStatus${item._id}" value="stuck">
+                    </p>
+                </div>
+
+                <div class="rimandato">
+                    <p class="radioButton">
+                        <input type="radio" name="elementStatus${item._id}" value="ostponed">
+                    </p>
+                </div>
+
+                <div id="notes" class="note">
+                    <p class="doNotes">${item.notes}</p>
+                </div>
+
+                <div class="priorita">
+                    <p>${item.priority} </p>
+                </div>
+
+                <div class="opzioni">
+                    <p>
+                        <button class="opzioniBottone" id="modifyButton">
+                            <ion-icon name="hammer"></ion-icon>
+                        </button>
+                        <button class="opzioniBottone removeButton" >
+                            <ion-icon name="remove-circle"></ion-icon>
+                        </button>
+                        <button class="opzioniBottone" id="archiveButton">
+                            <ion-icon name="folder-open"></ion-icon>
+                        </button>
+                    </p>
+                </div>
+            </div>
+            `
+            console.log(item)
+            document.querySelector(".list").innerHTML = outPut;
+            })
+        });
+}
+generateList();
+
+//*****POST*****
+const postTask = () => {
+    let writeName = document.querySelector('.writeName').value;
+    let radioButtons = document.getElementsByName('elementStatus'); //Attr.name('elementStatus').value;
+    let statusValue = "";
+    for (i = 0; i < radioButtons.length; i++) {
+        if (radioButtons[i].checked) {
+            statusValue = radioButtons[i].value;
+            break
+        } else {
+            statusValue = null;
+        }
+    }
+    let writeNote = document.querySelector('.writeNote').value;
+    let prioritySelector = document.querySelector('.prioritySelector').value;
+
+
+    fetch(url, {
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-        }
-
-    })
-    .then(result => result.json())
-    .then(response => {
-        // console.log(response)
-        console.log("test1")
-        console.log(" here's result ");
-        response.map((item, index) => {
-            outPut += /*html*/ `
-
-
-            <p>${item.notes}</p>
-            `
-
-            document.querySelector(".doTitle").innerHTML = outPut;
-
-            console.log("test3");
-            console.log(item)
+        },
+        body: JSON.stringify({
+            "userId": userId,
+            "argument": writeName,
+            "status": statusValue, //<--problem
+            "notes": writeNote,
+            "priority": prioritySelector
         })
-    });
+    })
+    writeName = "";
+    statusValue = null;
+    writeNote = "";
+    prioritySelector = "";
+    generateList();
+    closeCreator();
+    
+}
 
-fetch(url, {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: {
-        "userId": userId,
-        "argument": writeName,
-        "status": radioButton,
-        "notes": writeNote,
-        "priority": prioritySelector
-    }
-})
+//*****PUT*****
+
+
+//*****DELETE*****
+const removeTask = (e) => {
+    console.log(e.target.id)
+}
+
+
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+// EVENT LISTENERS
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+openButton.addEventListener("click", openCreator);
+closeButton.addEventListener("click", closeCreator);
+addButton.addEventListener("click", postTask);
+removeButton.addEventListener("click", removeTask)
