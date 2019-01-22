@@ -140,6 +140,10 @@ button {
     padding-top: 2px;
 }
 
+.radioButtonTwo {
+    padding-top: 2px;
+}
+
 /* \\\\\\\\/////// */
 /*  Here's Buttons */
 /* ////////\\\\\\\ */
@@ -159,7 +163,20 @@ button {
     right: 5px;
 }
 
+.opzioniBottoneTwo {
+    width: 30px;
+    padding: 0;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
 
+.opzioniBottoneTwo ion-icon {
+    right: 5px;
+}
+
+/* \\\\\\\\\\\\/////////// */
+/*          MODALS         */
+/* ////////////\\\\\\\\\\\ */
 
 /* \\\\\\\\\\\\/////////// */
 /*      MODAL-CREATOR      */
@@ -172,7 +189,7 @@ button {
     background-color: #000000a8;
     width: 100%;
     height: 100%;
-    opacity: 0;
+    opacity: 0; 
 }
 
 .modal:hover {
@@ -187,6 +204,7 @@ button {
 
 
 .modalContent {
+    
     width: 78%;
     margin-top: 25.5vh;
     margin-left: auto;
@@ -298,6 +316,152 @@ button {
 }
 
 .creatorGrid button{
+    cursor: not-allowed;
+    opacity: 0.7
+}
+
+
+
+
+
+/* \\\\\\\\\\\\\\///////////// */
+/*      MODAL-MODIFIER (two)      */
+/* ////////////\\//\\\\\\\\\\\ */
+
+.modalTwo {
+    display: none;
+    position: fixed;
+    z-index: -1;
+    background-color: #000000a8;
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* change it back to 0 after you're done*/
+}
+
+.modalTwo:hover {
+    display: initial;
+    position: fixed;
+    z-index: 1;
+    background-color: #000000a8;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+}
+
+
+.modalContentTwo {
+    
+    width: 78%;
+    margin-top: 25.5vh;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid #a5a5a5;
+    border-radius: 6px;
+    background-color: #ffffffb6;
+}
+
+.modalContentTwo h2 {
+    margin-left: 5%;
+    padding-left: 2%;
+    color: #FF7C00;
+    background-color: #d4d4d400;
+    background: rgb(0, 0, 0);
+    background: linear-gradient(90deg, #000000a5 0%, #b0b0b000 100%);
+    width: 25%;
+}
+
+.closeButtonTwo {
+    position: absolute;
+    display: inline-block;
+    right: 15vw;
+    top: 30.5vh;
+    background-color: #1f1e1e;
+    border-radius: 4px;
+    padding: 3px 8px 3px 8px;
+    border: 1px solid #626262;
+    color: #FF7C00;
+    transition-duration: 0.4s;
+}
+
+.closeButtonTwo:hover {
+    background-color: #FF7C00;
+    color: #1f1e1e;
+}
+
+.modifyButton {
+    position: relative;
+    display: inline-block;
+    left: 87.5%;
+    margin-top: 1vh;
+    margin-bottom: 2vh;
+    background-color: #1f1e1e;
+    border-radius: 4px;
+    padding: 3px 8px 3px 8px;
+    border: 1px solid #626262;
+    color: #FF7C00;
+    transition-duration: 0.4s;
+}
+
+.modifyButton:hover {
+    background-color: #FF7C00;
+    color: #1f1e1e;
+}
+
+/* \\\\\\\\\\\\\\\\\\////////////////// */
+/*   Container for the modal-creator    */
+/* //////////////////\\\\\\\\\\\\\\\\\\ */
+.creatorGridTwo {
+    width: 90%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "createE statusO statusS statusP createN createP noOpt";
+}
+
+.createETwo {
+    grid-area: createE;
+    background-color: #3f3f3f;
+    text-align: center;
+}
+
+.statusOTwo {
+    grid-area: statusO;
+    background-color: #626262;
+    text-align: center;
+}
+
+.statusSTwo {
+    grid-area: statusS;
+    background-color: #3f3f3f;
+    text-align: center;
+}
+
+.statusPTwo {
+    grid-area: statusP;
+    background-color: #626262;
+    text-align: center;
+}
+
+.createNTwo {
+    grid-area: createN;
+    background-color: #3f3f3f;
+    text-align: center;
+}
+
+.createPTwo {
+    grid-area: createP;
+    background-color: #626262;
+    text-align: center;
+}
+
+.noOptTwo {
+    grid-area: noOpt;
+    background-color: #3f3f3f;
+    text-align: center;
+}
+
+.creatorGridTwo button{
     cursor: not-allowed;
     opacity: 0.7
 }

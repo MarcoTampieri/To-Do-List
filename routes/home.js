@@ -14,42 +14,26 @@ module.exports = (router) => {
             userId: req.params.userId,
         }, (err, ToDoElement) => {
             if (err) throw err;
-
+            console.log("triple check")
             res.send(ToDoElement)
-            console.log(ToDoElement)
+            // console.log(ToDoElement)
             for (i = 0; i < ToDoElement.length; i++) {
-                console.log(ToDoElement[i].notes)
+                // console.log(ToDoElement[i].notes)
             }
-
         })
     })
 
-    router.delete('/home/:userId', (req, res) => {
-        ToDoElement.findById(req.params.elementId)
-        .then(response => {
-            console.log(response)
-        })
-
-
-        // console.log(email);
-        // jsonfile.readFile(file_path, function (err, content) {
-
-        //     for (var i = content.length - 1; i >= 0; i--) {
-        //         if (content[i].email === email) {
-        //             console.log("removing " + content[i].email + "from DB");
-        //             content.splice(i, 1);
-        //         }
-        //     }
-
-        //     jsonfile.writeFile(file_path, content, function (err) {
-        //         console.log(err);
-        //     });
-        //     res.sendStatus(200);
-        // });
-    });
+    //*****GET BY ID*****
+    router.get('/home/elements/:elementId', (req, res) => {
+        ToDoElement.findById({_id:req.params.elementId},
+            (err, ToDoElement) => {               
+                if (err) throw err;
+                res.send(ToDoElement)
+            })
+            console.log("double check")
+    })
 
     //*****POST*****
-
     router.post("/home/:userId", (req, res) => {
 
         const newToDoElement = new ToDoElement({
@@ -72,36 +56,35 @@ module.exports = (router) => {
             })
     });
 
-    
+    //*****Put*****
+    router.put("/home", (req, res) => {
+        ToDoElement.findByIdAndUpdate({
+            _id: req.body.elementId
+        }, {
+            argument: req.body.argument,
+            status: req.body.status,
+            notes: req.body.notes,
+            priority: req.body.priority
+        }, {
+            new: true
+        },(err, ToDoElement) => {
+            if (err) throw err;
+            res.send(ToDoElement);
+        })
+    });
 
-    // router.put("/user", (req, res) => {
-    //     let user;
-    //     let username = req.body.username;
-    //     let email = req.query.email;
-    //     let email2 = req.body.email;
-    //     console.log(email)
-    //     jsonfile.readFile(file_path, function (err, content) {
-    //         for (var i = content.length - 1; i >= 0; i--) {
-    //             if (content[i].email === email) {
-    //                 console.log("updated user " + email + " has now username : " + username);
-    //                 user = content[i];
-    //                 user.username = username;
-    //                 user.email2 = email;
+    //*****DELETE*****
+    router.delete('/home', (req, res) => {
 
-    //             }
-    //         }
-
-    //         jsonfile.writeFile(file_path, content, function (err) {
-    //             console.log(err);
-    //         });
-    //     });
-    //     res.send(200);
-    // });
-
-    
-
-
-
-
-
+        ToDoElement.deleteOne({
+                _id: req.body.elementId
+            })
+            .then(response => {
+                res.send({
+                    message: `Deleteing task: ${req.body.elementId}`
+                })
+                console.log(`Deleteing task: ${req.body.elementId}`)
+            })
+            .catch(err => res.send(err))
+    })
 }

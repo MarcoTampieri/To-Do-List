@@ -12,14 +12,15 @@ if (!token) {
 const body = document.querySelector("body");
 body.style.display = "initial";
 
-
-const openButton = document.querySelector(".openButton");
-const closeButton = document.querySelector(".closeButton");
-const addButton = document.querySelector(".addButton");
-const modifyButton = document.querySelector("#modifyButton");
-const removeButton = document.querySelector(".removeButton");
-const archiveButton = document.querySelector("#archiveButton");
+const openButton = document.querySelector(".openButton"); //ok
+const closeButton = document.querySelector(".closeButton"); //ok
+const closeButtonTwo = document.querySelector(".closeButtonTwo");
+const addButton = document.querySelector(".addButton"); //ok
+const modifyButton = document.querySelector(".modifyButton");
 const modal = document.querySelector(".modal");
+const modalTwo = document.querySelector(".modaltwo");
+let putId;
+
 
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 // FUNCTIONS
@@ -37,9 +38,17 @@ const closeCreator = () => {
 }
 
 
+
+const closeModifier = () => {
+    modalTwo.style.transitionDuration = "0.5s";
+    modalTwo.style.display = "none";
+}
+
+
 // *****CRUD SECTION*****
 
 let url = `http://localhost:5000/api/home/${userId}`;
+let urlDel = `http://localhost:5000/api/home`;
 
 //*****GET*****
 const generateList = () => {
@@ -89,10 +98,10 @@ const generateList = () => {
 
                 <div class="opzioni">
                     <p>
-                        <button class="opzioniBottone" id="modifyButton">
+                        <button class="opzioniBottone" id="modifyButton" onclick="openModifier(this.value)" value="${item._id}">
                             <ion-icon name="hammer"></ion-icon>
                         </button>
-                        <button class="opzioniBottone removeButton" >
+                        <button class="opzioniBottone" id="removeButton" onclick="removeTask(this.value)" value="${item._id}" >
                             <ion-icon name="remove-circle"></ion-icon>
                         </button>
                         <button class="opzioniBottone" id="archiveButton">
@@ -102,8 +111,8 @@ const generateList = () => {
                 </div>
             </div>
             `
-            console.log(item)
-            document.querySelector(".list").innerHTML = outPut;
+                console.log(item)
+                document.querySelector(".list").innerHTML = outPut;
             })
         });
 }
@@ -145,15 +154,81 @@ const postTask = () => {
     prioritySelector = "";
     generateList();
     closeCreator();
-    
+
 }
 
 //*****PUT*****
+let writeNameTwo = document.querySelector(".writeNameTwo");
+let radioButtonTwo = document.querySelector(".radioButtonTwo");
+let createNTwo = document.querySelector(".createNTwo");
+let createPTwo = document.querySelector(".createPTwo");
 
+const openModifier = (e) => {
+    modalTwo.style.display = "initial";
+    modalTwo.style.zIndex = "1";
+    modalTwo.style.transitionDuration = "0.3s";
+    console.log("we got here")
+
+
+    putId = e;
+    let urlSingle = `http://localhost:5000/api/home/elements/${putId}`
+    fetch(urlSingle, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(result => result.json())
+        .then(response => {
+            console.log("we got this far")
+            console.log(response.argument)
+
+            writeNameTwo.value = response.argument;
+            let statusValueTwo = "";
+            for (i = 0; i < radioButtonsTwo.length; i++) {
+                if (radioButtonsTwo[i].checked) {
+                    statusValueTwo = radioButtonsTwo[i].value;
+                    break
+                } else {
+                    statusValueTwo = null;
+                }
+            };
+            createNTwo.value = response.notes;
+            createPTwo.value = response.priority;
+            console.log("almost there");
+        })
+        .catch(err => {
+            throw err
+        })
+}
+
+const modifyTask = () => {
+    console.log("testting put")
+    console.log(putId)
+
+
+}
 
 //*****DELETE*****
 const removeTask = (e) => {
-    console.log(e.target.id)
+    console.log("testing delete id")
+    // console.log("id",e);
+
+    let sure = confirm("Do you Want to delete this task?");
+
+    if (sure == true) {
+        fetch(urlDel, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "elementId": e,
+            })
+        }, )
+        console.log('deleted')
+        generateList();
+    };
 }
 
 
@@ -164,5 +239,6 @@ const removeTask = (e) => {
 
 openButton.addEventListener("click", openCreator);
 closeButton.addEventListener("click", closeCreator);
+closeButtonTwo.addEventListener("click", closeModifier);
 addButton.addEventListener("click", postTask);
-removeButton.addEventListener("click", removeTask)
+modifyButton.addEventListener("click", modifyTask);
