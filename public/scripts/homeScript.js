@@ -160,8 +160,8 @@ const postTask = () => {
 //*****PUT*****
 let writeNameTwo = document.querySelector(".writeNameTwo");
 let radioButtonTwo = document.querySelector(".radioButtonTwo");
-let createNTwo = document.querySelector(".createNTwo");
-let createPTwo = document.querySelector(".createPTwo");
+let writeNoteTwo = document.querySelector(".writeNoteTwo");
+let prioritySelectorTwo = document.querySelector(".prioritySelectorTwo");
 
 const openModifier = (e) => {
     modalTwo.style.display = "initial";
@@ -181,20 +181,20 @@ const openModifier = (e) => {
         .then(result => result.json())
         .then(response => {
             console.log("we got this far")
-            console.log(response.argument)
-
+            console.log(response)
+            console.log(response.notes)
             writeNameTwo.value = response.argument;
-            let statusValueTwo = "";
-            for (i = 0; i < radioButtonsTwo.length; i++) {
-                if (radioButtonsTwo[i].checked) {
-                    statusValueTwo = radioButtonsTwo[i].value;
-                    break
-                } else {
-                    statusValueTwo = null;
-                }
-            };
-            createNTwo.value = response.notes;
-            createPTwo.value = response.priority;
+            // let statusValueTwo = "";
+            // for (i = 0; i < radioButtonsTwo.length; i++) {
+            //     if (radioButtonsTwo[i].checked) {
+            //         statusValueTwo = radioButtonsTwo[i].value;
+            //         break
+            //     } else {
+            //         statusValueTwo = null;
+            //     }
+            // };
+            writeNoteTwo.value = response.notes;
+            prioritySelectorTwo.value = response.priority;
             console.log("almost there");
         })
         .catch(err => {
@@ -206,7 +206,21 @@ const modifyTask = () => {
     console.log("testting put")
     console.log(putId)
 
-
+    fetch(urlDel, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            "elementId": putId,
+            "argument": writeNameTwo.value,
+            "notes": writeNoteTwo.value,
+            "priority": prioritySelectorTwo.value
+        })
+    })
+    .catch(err => {throw err});
+    generateList();
+    closeModifier();
 }
 
 //*****DELETE*****
